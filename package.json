@@ -4,6 +4,7 @@
   "description": "Awesome project developed for St. Claus",
   "type": "commonjs",
   "scripts": {
+    "lint": "eslint '*.{js,ts}' --fix",
     "prestart": "npm run typeorm migration:run -- -d src/database/data-source.ts",
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
