@@ -25,7 +25,7 @@ export enum Category {
 }
 
 @Entity()
-export abstract class EBook {
+export abstract class Ebook {
   @PrimaryColumn({ type: 'uuid' })
   id: string;
 
@@ -38,7 +38,7 @@ export abstract class EBook {
   @Column({ type: 'integer', nullable: true })
   year: number;
 
-  @Column({ type: 'integer', nullable: false })
+  @Column({ type: 'integer', nullable: true })
   pages: number;
 
   @Column({ type: 'enum', enum: Language, nullable: false })

@@ -1,8 +1,8 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
+import { Ebook } from './entity/EBook';
 import { Person } from './entity/Person';
-import { EBook } from './entity/EBook';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -13,8 +13,8 @@ export const AppDataSource = new DataSource({
   database: process.env.POSTGRES_DATABASE,
   synchronize: true,
   logging: true,
-  entities: [Person, EBook],
-  migrations: ['src/database/migration/*.ts'],
+  entities: [Person, Ebook],
+  // migrations: ['src/database/migration/*.ts'],
   // ssl: { rejectUnauthorized: false },
   subscribers: [],
 });

@@ -1,0 +1,172 @@
+{
+  "Ebooks": [
+    {
+      "id": "7fa2a7c4-f2b0-4e46-b509-f94a8abab3f6",
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "year": 1997,
+      "pages": 336,
+      "language": "inglês",
+      "category": "fantasia"
+    },
+    {
+      "id": "81173a22-8185-47fb-b891-3f81045a0503",
+      "title": "1984",
+      "author": "George Orwell",
+      "year": 1949,
+      "pages": 328,
+      "language": "inglês",
+      "category": "ficção"
+    },
+    {
+      "id": "a47f5a3e-c78c-4c32-a8cd-8055ec9a17f9",
+      "title": "To Kill a Mockingbird",
+      "author": "Harper Lee",
+      "year": 1960,
+      "pages": 281,
+      "language": "inglês",
+      "category": "ficção"
+    },
+    {
+      "id": "bd4dfcf7-96e4-4953-a909-3a4bf8cde54e",
+      "title": "The Great Gatsby",
+      "author": "F. Scott Fitzgerald",
+      "year": 1925,
+      "pages": 180,
+      "language": "inglês",
+      "category": "ficção"
+    },
+    {
+      "id": "ad176aa7-31e5-4711-9eab-3b6e82d4fe32",
+      "title": "Pride and Prejudice",
+      "author": "Jane Austen",
+      "year": 1813,
+      "pages": 279,
+      "language": "inglês",
+      "category": "romance"
+    },
+    {
+      "id": "de18b8aa-fab1-4f0c-a35e-0a389a160570",
+      "title": "The Lord of the Rings",
+      "author": "J.R.R. Tolkien",
+      "year": 1954,
+      "pages": 1178,
+      "language": "inglês",
+      "category": "fantasia"
+    },
+    {
+      "id": "6cb66264-50ae-4a1b-85b4-63de0d30de52",
+      "title": "The Catcher in the Rye",
+      "author": "J.D. Salinger",
+      "year": 1951,
+      "pages": 277,
+      "language": "inglês",
+      "category": "ficção"
+    },
+    {
+      "id": "122da105-b477-47b5-baf4-9b257c6a8d84",
+      "title": "The Da Vinci Code",
+      "author": "Dan Brown",
+      "year": 2003,
+      "pages": 454,
+      "language": "inglês",
+      "category": "thriller"
+    },
+    {
+      "id": "4a39e00c-91f4-4c82-82f2-9c54b4b95143",
+      "title": "The Alchemist",
+      "author": "Paulo Coelho",
+      "year": 1988,
+      "pages": 208,
+      "language": "português",
+      "category": "ficção"
+    },
+    {
+      "id": "4e161431-b7c3-4b4b-b62f-476b3dca2d95",
+      "title": "The Hobbit",
+      "author": "J.R.R. Tolkien",
+      "year": 1937,
+      "pages": 310,
+      "language": "inglês",
+      "category": "fantasia"
+    }
+  ],
+  "Users": [
+    {
+      "id": "3c541da0-9a3c-4c5d-9d4d-ff67c3e4f1e2",
+      "email": "santaclaus@merrychristmas.com",
+      "name": "Santa Claus",
+      "role": "St. Claus"
+    },
+    {
+      "id": "b4e2d0a3-6ad5-47e0-b90f-f5398b773d5a",
+      "email": "alice@example.com",
+      "name": "Alice Smith",
+      "bookTitle": "Harry Potter and the Philosopher's Stone",
+      "bookAuthor": "J.K. Rowling"
+    },
+    {
+      "id": "1efab1aa-4d68-4623-9a45-4b153e2069d8",
+      "email": "bob@example.com",
+      "name": "Bob Johnson",
+      "bookTitle": "1984",
+      "bookAuthor": "George Orwell"
+    },
+    {
+      "id": "1cc8b2a4-25e0-4710-892f-9089a11dcd2c",
+      "email": "charlie@example.com",
+      "name": "Charlie Brown",
+      "bookTitle": "To Kill a Mockingbird",
+      "bookAuthor": "Harper Lee"
+    },
+    {
+      "id": "0c27cc5e-87ed-4f7d-a1f8-e69b294fc1e5",
+      "email": "diana@example.com",
+      "name": "Diana Garcia",
+      "bookTitle": "The Great Gatsby",
+      "bookAuthor": "F. Scott Fitzgerald"
+    },
+    {
+      "id": "44460513-b3b3-4ae7-90d0-e13fbb1a61f7",
+      "email": "edward@example.com",
+      "name": "Edward Wilson",
+      "bookTitle": "Pride and Prejudice",
+      "bookAuthor": "Jane Austen"
+    },
+    {
+      "id": "2a1b4e5e-8b85-4f86-a19e-6be47db21b18",
+      "email": "frank@example.com",
+      "name": "Frank Thompson",
+      "bookTitle": "The Lord of the Rings",
+      "bookAuthor": "J.R.R. Tolkien"
+    },
+    {
+      "id": "cbad5fe6-d768-4867-8e0c-d2482826edf5",
+      "email": "grace@example.com",
+      "name": "Grace Clark",
+      "bookTitle": "The Catcher in the Rye",
+      "bookAuthor": "J.D. Salinger"
+    },
+    {
+      "id": "a6bfc8a0-3b0a-470f-bddc-0d3fc1479cd7",
+      "email": "henry@example.com",
+      "name": "Henry Young",
+      "bookTitle": "The Da Vinci Code",
+      "bookAuthor": "Dan Brown"
+    },
+    {
+      "id": "774947f1-bc6b-4372-bf29-5bbd8c3f1d18",
+      "email": "isabel@example.com",
+      "name": "Isabel Martinez",
+      "bookTitle": "The Alchemist",
+      "bookAuthor": "Paulo Coelho"
+    },
+    {
+      "id": "2c6a1a71-d0ff-4ba6-8fc2-4474cd863eb3",
+      "email": "jacob@example.com",
+      "name": "Jacob Brown",
+      "bookTitle": "The Hobbit",
+      "bookAuthor": "J.R.R. Tolkien"
+    }
+  ]
+}

@@ -15,9 +15,12 @@ export abstract class Person {
   @Column({ type: 'varchar', nullable: false, length: 100 })
   name: string;
 
-  @Column({ type: 'varchar', nullable: false, length: 100 })
-  gift: string;
+  @Column({ type: 'varchar', nullable: true, length: 100 })
+  bookTitle: string;
 
-  @Column({ type: "enum", enum: UserRole, nullable: false, default: UserRole.USER })
+  @Column({ type: 'varchar', nullable: true, length: 100 })
+  bookAuthor: string;
+
+  @Column({ type: 'enum', enum: UserRole, nullable: false, default: UserRole.USER })
   role: UserRole;
 }
