@@ -4,6 +4,7 @@ export enum ErrorTypes {
   GenericError = 'GenericError',
   BadRequest = 'BadRequest',
   UnauthorizedError = 'UnauthorizedError',
+  CategoryNotFound = 'CategoryNotFound',
 }
 
 interface ErrorResponseObject {
@@ -26,6 +27,10 @@ export const errorCatalog: ErrorCatalog = {
   },
   UnauthorizedError: {
     message: 'Unauthorized user',
+    httpStatus: StatusCodes.UNAUTHORIZED,
+  },
+  CategoryNotFound: {
+    message: 'Category not found',
     httpStatus: StatusCodes.UNAUTHORIZED,
   }
 };

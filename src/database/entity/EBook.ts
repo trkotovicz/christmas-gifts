@@ -1,28 +1,6 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
-
-export enum Language {
-  ENGLISH = "inglês",
-  PORTUGUESE = "português",
-  SPANISH = "espanhol",
-  FRENCH = "francês",
-  ITALIAN = "italiano",
-  GERMAN = "alemão"
-}
-
-export enum Category {
-  SCIFI = "ficção",
-  ROMANCE = "romance",
-  FANTASY = "fantasia",
-  HISTORY = "história",
-  SELF_HELP = "auto ajuda",
-  BUSINESS = "negócios",
-  BIOGRAPHIES = "biografias",
-  TEEN = "juvenil",
-  CHILDREN = "infantil",
-  THRILLER = "thriller",
-  ARTS = "arts",
-  COMIC_BOOKS = "HQ"
-}
+import { Language } from '../../interfaces/Language';
+import { Category } from '../../interfaces/Category';
 
 @Entity()
 export abstract class Ebook {
