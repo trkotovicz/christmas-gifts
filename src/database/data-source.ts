@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import 'reflect-metadata';
 import { DataSource } from 'typeorm';
-import { Ebook } from './entity/EBook';
+import { Ebook } from './entity/Ebook';
 import { Person } from './entity/Person';
 
 export const AppDataSource = new DataSource({

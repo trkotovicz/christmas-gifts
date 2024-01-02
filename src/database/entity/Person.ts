@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 export enum UserRole {
-  ADMIN = "St. Claus",
+  ST_CLAUS = "St. Claus",
+  ADMIN = "administrador",
   USER = "usuário padrão"
 }
 @Entity()

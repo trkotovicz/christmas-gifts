@@ -99,6 +99,18 @@
       "role": "St. Claus"
     },
     {
+      "id": "62e20bbd-d386-4a73-92b7-109015fa2d09",
+      "email": "evergreen@merrychristmas.com",
+      "name": "Evergreen",
+      "role": "administrador"
+    },
+    {
+      "id": "ecfa758b-9f37-4bb4-b138-537b789cb462",
+      "email": "snowball@merrychristmas.com",
+      "name": "Snowball",
+      "role": "administrador"
+    },
+    {
       "id": "b4e2d0a3-6ad5-47e0-b90f-f5398b773d5a",
       "email": "alice@example.com",
       "name": "Alice Smith",
