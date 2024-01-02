@@ -3,6 +3,7 @@ import { AppDataSource } from '../database/data-source';
 import { Ebook } from '../database/entity/EBook';
 import { Language } from '../interfaces/Language';
 import { Category } from '../interfaces/Category';
+import { ebookSchema } from '../utils/validations';
 
 export default class EbookService {
   newEbook = async (
@@ -13,6 +14,8 @@ export default class EbookService {
     language: Language,
     category: Category,
   ): Promise<Ebook> => {
+    ebookSchema({ title, author, year, pages, language, category });
+    
     const ebook = await AppDataSource.createQueryBuilder()
       .insert()
       .into(Ebook)
