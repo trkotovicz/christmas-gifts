@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import * as fs from 'fs';
 import { AppDataSource } from './data-source';
-import { Ebook } from './entity/EBook';
+import { Ebook } from './entity/Ebook';
 import { Person } from './entity/Person';
 
 async function populateDatabase() {

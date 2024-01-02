@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
-import { Language } from '../../interfaces/Language';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 import { Category } from '../../interfaces/Category';
+import { Language } from '../../interfaces/Language';
 
 @Entity()
 export abstract class Ebook {

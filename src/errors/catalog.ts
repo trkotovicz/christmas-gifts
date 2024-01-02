@@ -5,6 +5,7 @@ export enum ErrorTypes {
   BadRequest = 'BadRequest',
   UnauthorizedError = 'UnauthorizedError',
   CategoryNotFound = 'CategoryNotFound',
+  ApiKeyNotFound = 'ApiKeyNotFound',
 }
 
 interface ErrorResponseObject {
@@ -32,5 +33,9 @@ export const errorCatalog: ErrorCatalog = {
   CategoryNotFound: {
     message: 'Category not found',
     httpStatus: StatusCodes.UNAUTHORIZED,
-  }
+  },
+  ApiKeyNotFound: {
+    message: 'API Key not provided',
+    httpStatus: StatusCodes.BAD_REQUEST,
+  },
 };

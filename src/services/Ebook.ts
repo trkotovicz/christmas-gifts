@@ -1,6 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { AppDataSource } from '../database/data-source';
-import { Ebook } from '../database/entity/EBook';
+import { Ebook } from '../database/entity/Ebook';
 import { Language } from '../interfaces/Language';
 import { Category } from '../interfaces/Category';
 import { ebookSchema } from '../utils/validations';

@@ -1,7 +1,10 @@
 import { Router } from 'express';
+import authMiddleware from '../middlewares/authMiddleware';
 import { ebookController } from './main';
 
 const ebookRouter = Router();
+
+ebookRouter.use(authMiddleware);
 
 ebookRouter.post('/ebooks', ebookController.newEbook);
 ebookRouter.get('/ebooks', ebookController.listAll);
