@@ -6,6 +6,7 @@ const personRouter = Router();
 personRouter.post('/wishes', personController.newWish);
 personRouter.get('/wishes', personController.listAllWishes);
 personRouter.get('/wishes/title', personController.findWishesByBookTitle);
-personRouter.get('/wishes/person', personController.findWishesByPerson);
+personRouter.get('/wishes/person/name', personController.findWishesByPersonName);
+personRouter.get('/wishes/person/email', personController.findWishesByPersonEmail);
 
 export default personRouter;

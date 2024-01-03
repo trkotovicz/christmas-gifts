@@ -22,9 +22,15 @@ export default class PersonController {
     res.status(StatusCodes.OK).json(wishes);
   };
 
-  findWishesByPerson = async (req: Request, res: Response) => {
+  findWishesByPersonName = async (req: Request, res: Response) => {
     const { q } = req.query;
-    const wishes = await this.personService.findWishesByPerson(String(q));
+    const wishes = await this.personService.findWishesByPersonName(String(q));
+    res.status(StatusCodes.OK).json(wishes);
+  };
+
+  findWishesByPersonEmail = async (req: Request, res: Response) => {
+    const { q } = req.query;
+    const wishes = await this.personService.findWishesByPersonEmail(String(q));
     res.status(StatusCodes.OK).json(wishes);
   };
 }

@@ -52,14 +52,12 @@ export default class PersonService {
       .createQueryBuilder('person')
       .where('person.id = :id', { id: result })
       .getOne();
-    
+
     return insertedWish;
   };
 
   listAllWishes = async (): Promise<Person[]> => {
-    const wishes = await AppDataSource.getRepository(Person)
-      .createQueryBuilder('person')
-      .getMany();
+    const wishes = await AppDataSource.getRepository(Person).createQueryBuilder('person').getMany();
     return wishes;
   };
 
@@ -71,10 +69,18 @@ export default class PersonService {
     return wishes;
   };
 
-  findWishesByPerson = async (name: string): Promise<Person[]> => {
+  findWishesByPersonName = async (name: string): Promise<Person[]> => {
     const wishes = await AppDataSource.getRepository(Person)
       .createQueryBuilder('person')
       .where('LOWER(person.name) LIKE LOWER(:name)', { name: `%${name}%` })
+      .getMany();
+    return wishes;
+  };
+
+  findWishesByPersonEmail = async (email: string): Promise<Person[]> => {
+    const wishes = await AppDataSource.getRepository(Person)
+      .createQueryBuilder('person')
+      .where('LOWER(person.email) = LOWER(:email)', { email })
       .getMany();
     return wishes;
   };
