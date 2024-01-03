@@ -4,12 +4,10 @@ import { ebookController } from './main';
 
 const ebookRouter = Router();
 
-ebookRouter.use(authMiddleware);
-
-ebookRouter.post('/ebooks', ebookController.newEbook);
-ebookRouter.get('/ebooks', ebookController.listAll);
-ebookRouter.get('/ebooks/title', ebookController.findByTitle);
-ebookRouter.get('/ebooks/author', ebookController.findByAuthor);
-ebookRouter.get('/ebooks/category', ebookController.findByCategory);
+ebookRouter.post('/ebooks', authMiddleware, ebookController.newEbook);
+ebookRouter.get('/ebooks', authMiddleware, ebookController.listAll);
+ebookRouter.get('/ebooks/title', authMiddleware, ebookController.findByTitle);
+ebookRouter.get('/ebooks/author', authMiddleware, ebookController.findByAuthor);
+ebookRouter.get('/ebooks/category', authMiddleware, ebookController.findByCategory);
 
 export default ebookRouter;

@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { UserRole } from '../database/entity/Person';
 import { Category } from '../interfaces/Category';
 import { Language } from '../interfaces/Language';
 
@@ -19,6 +20,22 @@ export const ebookSchema = (data: object): Joi.ValidationResult => {
     category: Joi.string()
       .valid(...categoryValues)
       .required(),
+  });
+
+  const { error, value } = schema.validate(data);
+  if (error) throw new Error(error.message);
+  return value;
+};
+
+export const wishSchema = (data: object): Joi.ValidationResult => {
+  const rolesValues = Object.values(UserRole);
+
+  const schema = Joi.object({
+    name: Joi.string().min(3).max(100).required(),
+    email: Joi.string().email().required(),
+    bookTitle: Joi.string().min(3).max(50).required(),
+    bookAuthor: Joi.string().min(3).max(50).required(),
+    role: Joi.string().valid(...rolesValues),
   });
 
   const { error, value } = schema.validate(data);
