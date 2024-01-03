@@ -39,4 +39,15 @@ export default class PersonController {
     const wishes = await this.personService.findWishesByPersonEmail(String(q));
     res.status(StatusCodes.OK).json(wishes);
   };
+
+  listAllPersonEbook = async (req: Request, res: Response) => {
+    const wishes = await this.personService.listAllPersonEbook();
+    res.status(StatusCodes.OK).json(wishes);
+  };
+
+  listPersonEbookByEmail = async (req: Request, res: Response) => {
+    const { q } = req.query;
+    const wishes = await this.personService.listPersonEbookByEmail(String(q));
+    res.status(StatusCodes.OK).json(wishes);
+  };
 }

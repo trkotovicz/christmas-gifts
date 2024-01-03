@@ -92,4 +92,23 @@ export default class PersonService {
       .getMany();
     return wishes;
   };
+
+  listAllPersonEbook = async () => {
+    const data = await AppDataSource.getRepository(PersonEbook)
+      .createQueryBuilder('personEbook')
+      .innerJoinAndSelect('personEbook.person', 'person')
+      .innerJoinAndSelect('personEbook.ebook', 'ebook')
+      .getMany();
+    return data;
+  };
+
+  listPersonEbookByEmail = async (email: string) => {
+    const data = await AppDataSource.getRepository(PersonEbook)
+      .createQueryBuilder('personEbook')
+      .innerJoinAndSelect('personEbook.person', 'person')
+      .innerJoinAndSelect('personEbook.ebook', 'ebook')
+      .where('person.email = :email', { email })
+      .getMany();
+    return data;
+  };
 }
