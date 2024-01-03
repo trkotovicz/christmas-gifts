@@ -61,6 +61,14 @@ export default class PersonService {
     return wishes;
   };
 
+  findByWishId = async (id: string): Promise<Person[]> => {
+    const wish = await AppDataSource.getRepository(Person)
+      .createQueryBuilder('person')
+      .where({ id })
+      .getMany();
+    return wish;
+  };
+
   findWishesByBookTitle = async (title: string): Promise<Person[]> => {
     const wishes = await AppDataSource.getRepository(Person)
       .createQueryBuilder('person')
