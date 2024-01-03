@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { PersonEbook } from './PersonEbook';
 
 export enum UserRole {
   ST_CLAUS = "St. Claus",
@@ -24,4 +25,7 @@ export abstract class Person {
 
   @Column({ type: 'enum', enum: UserRole, nullable: false, default: UserRole.USER })
   role: UserRole;
+
+  @OneToMany(() => PersonEbook, (personEbook) => personEbook.person)
+  personEbooks: PersonEbook[];
 }

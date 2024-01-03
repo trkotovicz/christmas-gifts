@@ -2,6 +2,9 @@ import { randomUUID } from 'crypto';
 import { AppDataSource } from '../database/data-source';
 import { Person, UserRole } from '../database/entity/Person';
 import { wishSchema } from '../utils/validations';
+import { Ebook } from '../database/entity/Ebook';
+import { ErrorTypes } from '../errors/catalog';
+import { PersonEbook } from '../database/entity/PersonEbook';
 
 export default class PersonService {
   newWish = async (
@@ -13,25 +16,44 @@ export default class PersonService {
   ): Promise<Person> => {
     wishSchema({ email, name, bookTitle, bookAuthor, role });
 
-    const wish = await AppDataSource.createQueryBuilder()
-      .insert()
-      .into(Person)
-      .values({
-        id: randomUUID(),
-        email,
-        name,
-        bookTitle,
-        bookAuthor,
-        role
-      })
-      .execute();
+    const result = await AppDataSource.transaction(async (transactionalEntityManager) => {
+      const wish = await transactionalEntityManager
+        .createQueryBuilder()
+        .insert()
+        .into(Person)
+        .values({
+          id: randomUUID(),
+          email,
+          name,
+          bookTitle,
+          bookAuthor,
+          role,
+        })
+        .execute();
 
-    const result = await AppDataSource.getRepository(Person)
+      const ebook = await transactionalEntityManager.getRepository(Ebook).findOne({
+        where: {
+          title: bookTitle,
+          author: bookAuthor,
+        },
+      });
+
+      if (!ebook) throw new Error(ErrorTypes.EbookNotInCatalog);
+
+      const personEbook = new PersonEbook();
+      personEbook.personId = wish.identifiers[0].id;
+      personEbook.ebookId = ebook.id;
+      await transactionalEntityManager.getRepository(PersonEbook).save(personEbook);
+
+      return wish.identifiers[0].id;
+    });
+
+    const insertedWish = await AppDataSource.getRepository(Person)
       .createQueryBuilder('person')
-      .where('person.id = :id', { id: wish.identifiers[0].id })
+      .where('person.id = :id', { id: result })
       .getOne();
-
-    return result;
+    
+    return insertedWish;
   };
 
   listAllWishes = async (): Promise<Person[]> => {

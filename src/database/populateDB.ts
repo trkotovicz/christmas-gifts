@@ -3,21 +3,34 @@ import * as fs from 'fs';
 import { AppDataSource } from './data-source';
 import { Ebook } from './entity/Ebook';
 import { Person } from './entity/Person';
+import { PersonEbook } from './entity/PersonEbook';
 
 async function populateDatabase() {
   try {
-    // Inicializa a conexão do TypeORM antes de fazer operações no banco de dados
     await AppDataSource.initialize();
 
-    // Leitura do arquivo db.json
     const jsonData = fs.readFileSync('src/database/seedsDB.json', 'utf-8');
     const data = JSON.parse(jsonData);
 
-    console.log(data);
-
-    // Inserção dos dados no banco utilizando as entidades
     await AppDataSource.getRepository(Ebook).save(data.Ebooks);
-    await AppDataSource.getRepository(Person).save(data.Users);
+
+    for (const user of data.Users) {
+      const person = await AppDataSource.getRepository(Person).save(user);
+
+      const ebook = await AppDataSource.getRepository(Ebook).findOne({
+        where: {
+          title: user.bookTitle,
+          author: user.bookAuthor,
+        },
+      });
+
+      if (ebook) {
+        const personEbook = new PersonEbook();
+        personEbook.personId = person.id;
+        personEbook.ebookId = ebook.id;
+        await AppDataSource.getRepository(PersonEbook).save(personEbook);
+      }
+    }
 
     console.log('Dados inseridos com sucesso!');
   } catch (error) {

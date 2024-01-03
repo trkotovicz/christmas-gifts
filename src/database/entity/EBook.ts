@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { Category } from '../../interfaces/Category';
 import { Language } from '../../interfaces/Language';
+import { PersonEbook } from './PersonEbook';
 
 @Entity()
 export abstract class Ebook {
@@ -24,4 +25,7 @@ export abstract class Ebook {
 
   @Column({ type: 'enum', enum: Category, nullable: false })
   category: Category;
+
+  @OneToMany(() => PersonEbook, (personEbook) => personEbook.ebook)
+  personEbooks: PersonEbook[];
 }

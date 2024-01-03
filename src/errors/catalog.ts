@@ -5,6 +5,7 @@ export enum ErrorTypes {
   BadRequest = 'BadRequest',
   UnauthorizedError = 'UnauthorizedError',
   CategoryNotFound = 'CategoryNotFound',
+  EbookNotInCatalog = 'EbookNotInCatalog',
   ApiKeyNotFound = 'ApiKeyNotFound',
 }
 
@@ -33,6 +34,10 @@ export const errorCatalog: ErrorCatalog = {
   CategoryNotFound: {
     message: 'Category not found',
     httpStatus: StatusCodes.UNAUTHORIZED,
+  },
+  EbookNotInCatalog: {
+    message: 'Sorry, this Ebook is not available',
+    httpStatus: StatusCodes.NOT_FOUND,
   },
   ApiKeyNotFound: {
     message: 'API Key not provided',
