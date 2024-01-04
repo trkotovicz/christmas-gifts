@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import PersonService from '../../services/Person';
 import NodemailerService from '../../services/nodemailer/nodemailerService';
+import { dateSchema } from '../../utils/validations';
 
 export default class NodemailerController {
   private personService: PersonService;
@@ -27,6 +28,9 @@ export default class NodemailerController {
   };
 
   sendAllEbooks = async (_req: Request, res: Response) => {
+    const date = new Date().toDateString();
+    dateSchema(date);
+
     const listAll = await this.personService.listAllPersonEbook();
 
     for (let item of listAll) {

@@ -42,3 +42,13 @@ export const wishSchema = (data: object): Joi.ValidationResult => {
   if (error) throw new Error(error.message);
   return value;
 };
+
+export const dateSchema = (data: string): Joi.ValidationResult => {
+  const schema = Joi.date().min('2023-12-25').message(
+    'A Data de envio deve ser à partir de 25/12/2023'
+  );
+  
+  const { error, value } = schema.validate(data);
+  if (error) throw new Error(error.message);
+  return value;
+}
