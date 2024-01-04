@@ -4,7 +4,7 @@ import 'express-async-errors';
 import errorHandler from './middlewares/error';
 import ebookRouter from './routes/Ebook';
 import personRouter from './routes/Person';
-import mailRouter from './routes/NodemailerRouter';
+import nodemailerRouter from './routes/NodemailerRouter';
 
 const app = express();
 app.use(express.json());
@@ -12,7 +12,7 @@ app.use(cors());
 
 app.use(ebookRouter);
 app.use(personRouter);
-app.use(mailRouter);
+app.use(nodemailerRouter);
 
 app.use(errorHandler);
 

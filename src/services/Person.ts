@@ -98,6 +98,7 @@ export default class PersonService {
       .createQueryBuilder('personEbook')
       .innerJoinAndSelect('personEbook.person', 'person')
       .innerJoinAndSelect('personEbook.ebook', 'ebook')
+      .where('person.role = :role', { role: 'usuário padrão' })
       .getMany();
     return data;
   };

@@ -12,6 +12,7 @@ const personService = new PersonService();
 const personController = new PersonController(personService);
 
 const nodemailerService = new NodemailerService();
-const nodemailerController = new NodemailerController(nodemailerService);
+const nodemailerController = new NodemailerController(nodemailerService, personService);
+
 
 export { ebookController, personController, nodemailerController };

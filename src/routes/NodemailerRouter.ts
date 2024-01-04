@@ -1,8 +1,9 @@
 import { Router } from 'express';
 import { nodemailerController } from './main';
 
-const mailRouter = Router();
+const nodemailerRouter = Router();
 
-mailRouter.post('/mail/ebook', nodemailerController.sendMail);
+nodemailerRouter.post('/mail/ebooks', nodemailerController.sendMail);
+nodemailerRouter.post('/send-all-ebooks', nodemailerController.sendAllEbooks);
 
-export default mailRouter;
+export default nodemailerRouter;
