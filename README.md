@@ -23,7 +23,7 @@ Se você quiser enviar os emails com todos os ebooks, tenha em mente que apenas 
 
 ## Ferramentas utilizadas
 
-A aplicação segue os princípios do SOLID e foi desenvolvida no modelo de camadas MSC (Model-Service-Conntroller) em Node.js, utilizando Typescript, Express.js, banco de dados PostgreSQL, TypeORM, e Swagger para a documentação. Além disso, é possível rodar a aplicação pelo Docker.</br>
+A aplicação segue os princípios do SOLID e foi desenvolvida no modelo de camadas MSC (Model-Service-Conntroller) em Node.js, utilizando Typescript, Express.js, banco de dados PostgreSQL, TypeORM, e Swagger para a documentação. Para o disparo de emails, foi utilizado o Nodemailer e o serviço de SMTP Ethereal. Além disso, é possível rodar a aplicação pelo Docker.</br>
 
 
 ## Variáveis de Ambiente
