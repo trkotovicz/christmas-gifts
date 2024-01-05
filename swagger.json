@@ -1,0 +1,826 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Christmas Gifts",
+    "description": "This is an amazing project developed for Santa Claus.\n\nIt's an ebook and gift list management system.\nIn this system, Santa Claus can register new ebooks that will be available for gifts on Christmas Day. Furthermore, we can place orders for ebooks that we would like to receive as a gift.\nTo make Santa's life easier, he can consult all gift requests, search specifically for wishes, by person, or for ebooks.\nFinally, when Christmas Day arrives, it can automatically send all the gifts at once.\n\nSome useful links:\n- [The Christmas Gifts repository](https://github.com/trkotovicz/christmas-gifts)\n- [The Ethereal email box - to check the sending of ebooks](https://ethereal.email/messages)\n\n**API KEY**\n\nTo access protected routes, you will need to enter an _api-key_.\n\nTo do this, access the .env.example file in the repository's root folder. In this file you will have two keys available that will work, one exclusive to Santa Claus and the other for his helpers (administrators).\n\nIf you want to send the emails with the ebooks, keep in mind that just Santa Claus is authorized to do it, so you'll need to provide his _api-key_.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "thais_kotovicz@hotmail.com"
+    }
+  },
+  "externalDocs": {
+    "description": "Connect with me on LinkedIn",
+    "url": "https://www.linkedin.com/in/thaiskotovicz/"
+  },
+
+  "tags": [
+    {
+      "name": "Ebook",
+      "description": "All about the available ebooks"
+    },
+    {
+      "name": "Wishes",
+      "description": "Access to people's wish lists"
+    },
+    {
+      "name": "Email",
+      "description": "Sending emails with gifts"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Ebook": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Misto Quente"
+          },
+          "author": {
+            "type": "string",
+            "example": "Charles Bukowski"
+          },
+          "year": {
+            "type": "string",
+            "format": "YYYY",
+            "example": "1982"
+          },
+          "pages": {
+            "type": "integer",
+            "example": 336
+          },
+          "language": {
+            "type": "string",
+            "description": "Language",
+            "example": "inglês",
+            "enum": [
+              "inglês",
+              "português",
+              "espanhol",
+              "francês",
+              "italiano",
+              "alemão"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "description": "Category",
+            "example": "romance",
+            "enum": [
+              "ficção",
+              "romance",
+              "fantasia",
+              "história",
+              "auto ajuda",
+              "negócios",
+              "biografia",
+              "juvenil",
+              "infantil",
+              "thriller",
+              "arts",
+              "HQ"
+            ]
+          }
+        }
+      },
+      "EbookResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "7fa2a7c4-f2b0-4e46-b509-f94a8abab3f6"
+          },
+          "title": {
+            "type": "string",
+            "example": "Harry Potter and the Philosopher's Stone"
+          },
+          "author": {
+            "type": "string",
+            "example": "J.K. Rowling"
+          },
+          "year": {
+            "type": "integer",
+            "format": "YYYY",
+            "example": 1997
+          },
+          "pages": {
+            "type": "integer",
+            "example": 336
+          },
+          "language": {
+            "type": "string",
+            "description": "Language",
+            "example": "inglês",
+            "enum": [
+              "inglês",
+              "português",
+              "espanhol",
+              "francês",
+              "italiano",
+              "alemão"
+            ]
+          },
+          "category": {
+            "type": "string",
+            "description": "Category",
+            "example": "fantasia",
+            "enum": [
+              "ficção",
+              "romance",
+              "fantasia",
+              "história",
+              "auto ajuda",
+              "negócios",
+              "biografia",
+              "juvenil",
+              "infantil",
+              "thriller",
+              "arts",
+              "HQ"
+            ]
+          }
+        }
+      },
+      "Wish": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "meghan@email.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "Meghan Xavier"
+          },
+          "bookTitle": {
+            "type": "string",
+            "example": 1984
+          },
+          "bookAuthor": {
+            "type": "string",
+            "example": "George Orwell"
+          }
+        }
+      },
+      "WishResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "1cc1eea3-a203-45ff-8885-d2aab5c68c02"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "meghan@email.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "Meghan Xavier"
+          },
+          "bookTitle": {
+            "type": "string",
+            "example": 1984
+          },
+          "bookAuthor": {
+            "type": "string",
+            "example": "George Orwell"
+          }
+        }
+      },
+      "WishEbookResponse": {
+        "type": "object",
+        "properties": {
+          "personId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "b4e2d0a3-6ad5-47e0-b90f-f5398b773d5a"
+          },
+          "ebookId": {
+            "type": "string",
+            "format": "uuid",
+            "example": "7fa2a7c4-f2b0-4e46-b509-f94a8abab3f6"
+          },
+          "person": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "b4e2d0a3-6ad5-47e0-b90f-f5398b773d5a"
+              },
+              "name": {
+                "type": "string",
+                "example": "Alice Smith"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "example": "meghan@email.com"
+              },
+              "bookTitle": {
+                "type": "string",
+                "example": "Harry Potter and the Philosopher's Stone"
+              },
+              "bookAuthor": {
+                "type": "string",
+                "example": "J.K. Rowling"
+              }
+            }
+          },
+          "ebook": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "7fa2a7c4-f2b0-4e46-b509-f94a8abab3f6"
+              },
+              "title": {
+                "type": "string",
+                "example": "Harry Potter and the Philosopher's Stone"
+              },
+              "author": {
+                "type": "string",
+                "example": "J.K. Rowling"
+              },
+              "year": {
+                "type": "string",
+                "format": "YYYY",
+                "example": "1997"
+              },
+              "pages": {
+                "type": "integer",
+                "example": 336
+              },
+              "language": {
+                "type": "string",
+                "description": "Language",
+                "example": "inglês",
+                "enum": [
+                  "inglês",
+                  "português",
+                  "espanhol",
+                  "francês",
+                  "italiano",
+                  "alemão"
+                ]
+              },
+              "category": {
+                "type": "string",
+                "description": "Category",
+                "example": "fantasia",
+                "enum": [
+                  "ficção",
+                  "romance",
+                  "fantasia",
+                  "história",
+                  "auto ajuda",
+                  "negócios",
+                  "biografia",
+                  "juvenil",
+                  "infantil",
+                  "thriller",
+                  "arts",
+                  "HQ"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api-key",
+        "in": "header"
+      }
+    }
+  },
+  "paths": {
+    "/ebooks": {
+      "post": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Ebook"
+        ],
+        "summary": "Add a new Ebook to the catalog",
+        "description": "Add a new Ebook to the catalog",
+        "requestBody": {
+          "description": "Add a new Ebook to the catalog",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ebook"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EbookResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request or Api Key Not Found"
+          },
+          "401": {
+            "description": "Category Not Found"
+          }
+        }
+      },
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Ebook"
+        ],
+        "summary": "List all Ebooks available in the catalog",
+        "description": "List all Ebooks available in the catalog",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EbookResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request or Api Key Not Found"
+          }
+        }
+      }
+    },
+    "/ebooks/title": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Ebook"
+        ],
+        "summary": "Finds Ebooks by title",
+        "description": "Finds Ebooks by title",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Title values that need to be considered for filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ebook"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request or Api Key Not Found"
+          }
+        }
+      }
+    },
+    "/ebooks/author": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Ebook"
+        ],
+        "summary": "Finds Ebooks by author",
+        "description": "Finds Ebooks by author",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Author values that need to be considered for filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Author"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ebook"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request or Api Key Not Found"
+          }
+        }
+      }
+    },
+    "/ebooks/category": {
+      "get": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Ebook"
+        ],
+        "summary": "Finds Ebooks by category",
+        "description": "Finds Ebooks by category",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Category values that need to be considered for filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ebook"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request or Api Key Not Found"
+          }
+        }
+      }
+    },
+    "/wishes": {
+      "post": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "Add a new wish to the wish list",
+        "description": "Add a new wish to the wish list",
+        "requestBody": {
+          "description": "Add a new wish to the wish list",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Wish"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WishResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Ebook is not available"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "List all wishes from the Santa's wish list",
+        "description": "List all wishes from the Santa's wish list",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WishResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/wishes/{id}": {
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "Find a wish by ID",
+        "description": "Returns a single wish",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of wish to return",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WishResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/wishes/title": {
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "Find wishes by Ebook title",
+        "description": "Returns an array with all wishes from that title",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Title values that need to be considered for filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Title"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WishResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/wishes/person/name": {
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "Find all wishes from an especific person",
+        "description": "Returns an array with all wishes from that person by name",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Name values that need to be considered for filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "Name"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WishResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/wishes/person/email": {
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "Find all wishes from an especific person",
+        "description": "Returns an array with all wishes from that person by email",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Email value that need to be considered for filter",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "default": "email@example.com"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WishResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/wishes-ebook": {
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "List all wishes with all informations about the desired Ebook",
+        "description": "Returns an array with all wishes and Ebook information",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WishEbookResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/wishes-ebook/email": {
+      "get": {
+        "tags": [
+          "Wishes"
+        ],
+        "summary": "Find all wishes with all Ebooks informations from an especific person",
+        "description": "Returns an array with all wishes and Ebook information from an especific person",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WishEbookResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/mail/ebooks": {
+      "post": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Email"
+        ],
+        "summary": "Send an Ebook to a person",
+        "description": "Send an Ebook to a person",
+        "responses": {
+          "202": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/send-all-ebooks": {
+      "post": {
+        "security": [
+          {
+            "api_key": []
+          }
+        ],
+        "tags": [
+          "Email"
+        ],
+        "summary": "Send all Ebooks from the wish list",
+        "description": "Send all Ebooks from the wish list",
+        "responses": {
+          "202": {
+            "description": "Successful operation"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  }
+}
