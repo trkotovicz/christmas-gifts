@@ -65,7 +65,7 @@ O comando subirá o container com o terminal `--detach`, portanto, se quiser aco
 
 ## API
 
-Com a aplicação rodando acesse a [documentação da API](http://localhost:3001/docs/) para ver as rotas disponíveis e os dados esperados em cada requisição. </br>
+Com a aplicação rodando acesse a [documentação da API](http://localhost:3001/docs/) (`http://localhost:3001/docs/`) para ver as rotas disponíveis e os dados esperados em cada requisição. </br>
 
  
  ---
